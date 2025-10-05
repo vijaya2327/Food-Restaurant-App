@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN FORM</title>
+    <style>
+        /* Background Styling */
+        body, html {
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Login Form Box */
+        #login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #login-form:hover {
+            transform: scale(1.02);
+        }
+
+        /* Label Styling */
+        #login-form label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        /* Input Fields */
+        #login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        #login-form input:focus {
+            border-color: #4e54c8;
+            box-shadow: 0 0 8px rgba(78, 84, 200, 0.4);
+            outline: none;
+        }
+
+        /* Login Button */
+        #login-form button {
+            width: 100%;
+            padding: 12px;
+            background: #4e54c8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #login-form button:hover {
+            background: #373b98;
+            transform: scale(1.05);
+        }
+
+        /* Message Box */
+        #result-message {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #result-message.success {
+            color: green;
+        }
+
+        #result-message.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LOGIN FORM</h1> <!-- Styled Title -->
+
+    <main>
+        <form id="login-form">
+            <label for="name">NAME:</label>
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+    	    <br>
+
+            <label for="e-mail">E-mail:</label>
+            <input type="email" id="e-mail" name="e-mail" placeholder="Enter Your Email" required>
+		    <br>
+
+            <label for="newpassword">New Password:</label>
+            <input type="password" id="newpassword" name="newpassword" placeholder="Enter New Password" required>
+
+            <label for="confirmpassword">Confirm Password:</label>
+            <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Your Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+	    <div id="result-message"></div>
+    </main>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("e-mail").value;
+            let newpassword = document.getElementById("newpassword").value;
+            let confirmpassword = document.getElementById("confirmpassword").value;
+            let resultMessage = document.getElementById("result-message");
+
+            if (name && email && newpassword && confirmpassword) {
+                if (newpassword.length >= 8) {
+                    if (newpassword === confirmpassword) {
+                        alert("Login Successful");
+                        resultMessage.textContent = "✅ Login Successful!";
+                        resultMessage.classList.add("success");
+                        resultMessage.classList.remove("error");
+                    } else {
+                        alert("Passwords do not match");
+                        resultMessage.textContent = "❌ Login Failed: Passwords do not match";
+                        resultMessage.classList.add("error");
+                        resultMessage.classList.remove("success");
+                    }
+                } else {
+                    alert("Password must be at least 8 characters long");
+                    resultMessage.textContent = "❌ Login Failed: Password must be at least 8 characters long";
+                    resultMessage.classList.add("error");
+                    resultMessage.classList.remove("success");
+                }
+            } else {
+                alert("Please enter valid credentials");
+                resultMessage.textContent = "❌ Login Failed: Please enter valid credentials";
+                resultMessage.classList.add("error");
+                resultMessage.classList.remove("success");
+            }
+        });
+    </script>
+</body>
+</html>
